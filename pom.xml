@@ -12,6 +12,10 @@
         <module>01-crawler-httpclient</module>
         <module>02-crawler-jsoup</module>
         <module>03-crawler-jd</module>
+        <module>04-crawler-webmagic</module>
+        <module>05-crawler-crawler4j</module>
+        <module>06-crawler-webcollector</module>
+        <module>00-crawler-http协议基础与网络抓包</module>
     </modules>
 
 <!--  父工程-->
