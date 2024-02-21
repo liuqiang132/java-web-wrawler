@@ -5,8 +5,6 @@ import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
 
-import java.util.List;
-
 /**
  * @author liuqiang132
  * @version 1.0
@@ -14,21 +12,15 @@ import java.util.List;
  * @date 2024/2/19 13:33
  */
 
-public class WebMagicDemo02 implements PageProcessor {
+public class WebMagicDemo03 implements PageProcessor {
 
-    private static final String ZHI_HU_URL = "https://pic.netbian.com/4kmeinv/";
+    private static final String JD_URL = "https://www.gaokao.com/gkpic/index.shtml";
 
     //页面的提取
     @Override
     public void process(Page page) {
-        List<String> all = page.getHtml().xpath("//[@class=clearfix]/li/a").all();
-        for (String s : all) {
-            System.out.println(s);
-        }
-        //page.putField("div",all);
-
-        //page.putField("div",page.getHtml().css("div.FeedContainer__items > div > a").all());
-
+        //Xpath
+        page.putField("div",page.getHtml().xpath("//div[@id=imgall]/a").all());
     }
 
     //设置配置信息
@@ -40,8 +32,8 @@ public class WebMagicDemo02 implements PageProcessor {
     public static void main(String[] args) {
 
         //启动程序
-        Spider.create(new WebMagicDemo02())
-                .addUrl(ZHI_HU_URL)
+        Spider.create(new WebMagicDemo03())
+                .addUrl(JD_URL)
                 .thread(10)
                 .run();
 
