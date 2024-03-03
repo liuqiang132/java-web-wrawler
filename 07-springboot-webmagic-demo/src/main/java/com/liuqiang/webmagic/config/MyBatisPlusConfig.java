@@ -1,0 +1,39 @@
+package com.liuqiang.webmagic.config;
+
+import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.core.incrementer.IKeyGenerator;
+import com.baomidou.mybatisplus.extension.incrementer.H2KeyGenerator;
+import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+/**
+ * @author liuqiang132
+ * @version 1.0
+ * @description: MyBatisPlus配置类
+ * @date 2024/2/14 13:08
+ */
+@Configuration
+public class MyBatisPlusConfig {
+
+    /**
+     *主键生成策略必须使用 INPUT
+     * @return
+     */
+    @Bean
+    public IKeyGenerator keyGenerator() {
+        return new H2KeyGenerator();
+    }
+    /**
+     * 添加分页插件
+     */
+    @Bean
+    public MybatisPlusInterceptor mybatisPlusInterceptor() {
+        MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
+        interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));//如果配置多个插件,切记分页最后添加
+        //interceptor.addInnerInterceptor(new PaginationInnerInterceptor()); 如果有多数据源可以不配具体类型 否则都建议配上具体的DbType
+        return interceptor;
+    }
+
+}

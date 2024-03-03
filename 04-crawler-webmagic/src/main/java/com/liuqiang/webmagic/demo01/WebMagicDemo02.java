@@ -21,13 +21,10 @@ public class WebMagicDemo02 implements PageProcessor {
     //页面的提取
     @Override
     public void process(Page page) {
-        List<String> all = page.getHtml().xpath("//[@class=clearfix]/li/a").all();
+        List<String> all = page.getHtml().xpath("//div[@class=slist]/ul/li/a/img/@src").all();
         for (String s : all) {
-            System.out.println(s);
+            System.out.println("https://pic.netbian.com/"+s);
         }
-        //page.putField("div",all);
-
-        //page.putField("div",page.getHtml().css("div.FeedContainer__items > div > a").all());
 
     }
 

@@ -16,6 +16,7 @@
         <module>05-crawler-crawler4j</module>
         <module>06-crawler-webcollector</module>
         <module>00-crawler-http协议基础与网络抓包</module>
+        <module>07-springboot-webmagic-demo</module>
     </modules>
 
 <!--  父工程-->

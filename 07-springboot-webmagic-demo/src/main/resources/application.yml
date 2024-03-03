@@ -1,0 +1,17 @@
+#
+server:
+  port: 8001
+spring:
+  application:
+    name: webmagic-service
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://43.143.179.85:3306/webmagic?useUnicode=true&&useSSL=false&&characterEncoding=UTF-8&&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+
+#mybatis-plus
+mybatis-plus:
+  type-aliases-package: com.liuqiang.webmagic.entity
+  mapper-locations: classpath*:/mapper/**/*.xml
+
