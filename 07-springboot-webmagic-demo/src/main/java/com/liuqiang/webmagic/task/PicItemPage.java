@@ -1,6 +1,6 @@
 package com.liuqiang.webmagic.task;
 
-import com.liuqiang.webmagic.pipeline.SaveImgePipeline;
+import com.liuqiang.webmagic.pipeline.SaveImgPipeline;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -21,7 +21,7 @@ import us.codecraft.webmagic.scheduler.QueueScheduler;
 public class PicItemPage implements PageProcessor {
 
     @Autowired
-    private SaveImgePipeline saveImgePipeline;
+    private SaveImgPipeline saveImgePipeline;
 
     public static final String MEI_NV_URL = "https://pic.netbian.com/4kmeinv/";
 

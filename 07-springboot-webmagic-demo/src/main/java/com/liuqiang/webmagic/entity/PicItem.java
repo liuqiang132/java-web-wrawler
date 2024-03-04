@@ -19,7 +19,8 @@ import java.util.Date;
 @TableName("picitem")
 public class PicItem implements Serializable {
 
-    @TableId(type = IdType.ASSIGN_UUID)
+
+    @TableId(type = IdType.ASSIGN_ID)
     private String id;
 
     @TableField("picName")
