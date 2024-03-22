@@ -62,12 +62,12 @@ public class SaveImgPipeline implements Pipeline {
             InputStream inputStream = new URL(meiImgUrl).openConnection().getInputStream();
             String replaceName = meiImgNames.replace("*", "");
             //判断文件夹是否存在
-            if (Files.isDirectory(Paths.get("C:\\Users\\liuqiang132\\Desktop\\tupian\\"))){
+            if (Files.isDirectory(Paths.get("C:\\Users\\liuqiang132\\Desktop\\tupian"))){
                 Files.copy(inputStream, Paths.get("C:\\Users\\liuqiang132\\Desktop\\tupian\\"+replaceName+".jpg"));
             }
 
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 }
