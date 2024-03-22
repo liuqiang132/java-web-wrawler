@@ -16,23 +16,23 @@ import java.util.Date;
  * @date 2024/3/3 13:28
  */
 @Data
-@TableName("picitem")
+@TableName("pic_item")
 public class PicItem implements Serializable {
 
 
     @TableId(type = IdType.ASSIGN_ID)
     private String id;
 
-    @TableField("picName")
+    @TableField("pic_name")
     private String picName;
 
-    @TableField("picUrl")
+    @TableField("pic_url")
     private String picUrl;
 
-    @TableField("createTime")
+    @TableField("create_time")
     private Date createTime;
 
-    @TableField("updateTime")
+    @TableField("update_time")
     private Date updateTime;
 
 

@@ -1,7 +1,7 @@
 package com.liuqiang.webmagic.task;
 
 import com.liuqiang.webmagic.pipeline.SaveImgPipeline;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.liuqiang.webmagic.utils.WebURL;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.Page;
@@ -10,6 +10,8 @@ import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.scheduler.BloomFilterDuplicateRemover;
 import us.codecraft.webmagic.scheduler.QueueScheduler;
+
+import javax.annotation.Resource;
 
 /**
  * @author liuqiang132
@@ -20,12 +22,14 @@ import us.codecraft.webmagic.scheduler.QueueScheduler;
 @Component
 public class PicItemPage implements PageProcessor {
 
-    @Autowired
+    @Resource
     private SaveImgPipeline saveImgePipeline;
 
-    public static final String MEI_NV_URL = "https://pic.netbian.com/4kmeinv/";
 
-    private Site site = Site.me().setRetryTimes(3).setTimeOut(10000).setSleepTime(1000);
+    @Resource
+    private WebURL webURL;
+
+    private final Site site = Site.me().setRetryTimes(3).setTimeOut(10000).setSleepTime(1000);
 
 
     @Override
@@ -48,7 +52,7 @@ public class PicItemPage implements PageProcessor {
     @Scheduled(initialDelay = 1000,fixedDelay = 1000)
     public void initWebMagicSpider(){
         Spider.create(new PicItemPage())
-                .addUrl(MEI_NV_URL)
+                .addUrl(webURL.MEI_NV_URL)
                 .setScheduler(new QueueScheduler().setDuplicateRemover(new BloomFilterDuplicateRemover(100000)))
                 .thread(20)
                 .addPipeline(saveImgePipeline)

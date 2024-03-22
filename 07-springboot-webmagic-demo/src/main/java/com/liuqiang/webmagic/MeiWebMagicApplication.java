@@ -8,7 +8,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 /**
  * @author liuqiang132
  * @version 1.0
- * @description: TODO
+ * @description: webMagicApplication
  * @date 2024/3/3 13:26
  */
 @SpringBootApplication

@@ -2,12 +2,12 @@ package com.liuqiang.webmagic.pipeline;
 
 import com.liuqiang.webmagic.entity.PicItem;
 import com.liuqiang.webmagic.service.PicItemService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import us.codecraft.webmagic.ResultItems;
 import us.codecraft.webmagic.Task;
 import us.codecraft.webmagic.pipeline.Pipeline;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -15,6 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author liuqiang132
@@ -24,7 +25,7 @@ import java.util.List;
  */
 @Component
 public class SaveImgPipeline implements Pipeline {
-    @Autowired
+    @Resource
     private PicItemService picItemService;
 
     @Override
@@ -37,7 +38,7 @@ public class SaveImgPipeline implements Pipeline {
         for (String meiImgUrl : meImg) {
             String newMeiImgUrl = "https://pic.netbian.com"+meiImgUrl;
             for (String meiImgNames : meImgName) {
-                picItem.setId(String.valueOf(System.currentTimeMillis()));
+                picItem.setId(UUID.randomUUID().toString().split("-")[0]);
                 picItem.setPicName(meiImgNames);
                 picItem.setPicUrl(newMeiImgUrl);
                 picItem.setCreateTime(new Date());
@@ -49,8 +50,6 @@ public class SaveImgPipeline implements Pipeline {
 
             }
         }
-
-
     }
 
     /**
