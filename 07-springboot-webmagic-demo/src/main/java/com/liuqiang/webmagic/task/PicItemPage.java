@@ -40,7 +40,7 @@ public class PicItemPage implements PageProcessor {
           page.setSkip(true);
       }
         //发现连接并添加到队列中去
-      page.addTargetRequests(page.getHtml().xpath("//div[@class='page']").links().all());
+      page.addTargetRequests(page.getHtml().xpath("//div[@class='page']/a").links().all());
 
     }
 
@@ -49,7 +49,7 @@ public class PicItemPage implements PageProcessor {
         return site;
     }
 
-    @Scheduled(initialDelay = 1000,fixedDelay = 1000)
+    @Scheduled(cron = "0/5 * * * * ?")
     public void initWebMagicSpider(){
         Spider.create(new PicItemPage())
                 .addUrl(webURL.MEI_NV_URL)

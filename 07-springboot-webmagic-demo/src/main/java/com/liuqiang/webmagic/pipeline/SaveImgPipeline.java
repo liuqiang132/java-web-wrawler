@@ -20,7 +20,7 @@ import java.util.UUID;
 /**
  * @author liuqiang132
  * @version 1.0
- * @description: TODO
+ * @description: 图片的数据保存功能
  * @date 2024/3/3 13:48
  */
 @Component
@@ -34,15 +34,16 @@ public class SaveImgPipeline implements Pipeline {
         List<String> meImg = resultItems.get("meImg");
         //获取图片的名称
         List<String> meImgName = resultItems.get("meImgName");
-        PicItem picItem = new PicItem();
         for (String meiImgUrl : meImg) {
             String newMeiImgUrl = "https://pic.netbian.com"+meiImgUrl;
             for (String meiImgNames : meImgName) {
-                picItem.setId(UUID.randomUUID().toString().split("-")[0]);
-                picItem.setPicName(meiImgNames);
-                picItem.setPicUrl(newMeiImgUrl);
-                picItem.setCreateTime(new Date());
-                picItem.setUpdateTime(picItem.getCreateTime());
+                PicItem picItem = PicItem.builder()
+                        .id(UUID.randomUUID().toString().split("-")[0])
+                        .picName(meiImgNames)
+                        .picUrl(newMeiImgUrl)
+                        .createTime(new Date())
+                        .updateTime(new Date())
+                        .build();
                 //下载图片并保存
                 saveImg(newMeiImgUrl,meiImgNames);
                 //保存图片地址及名称到数据库中
@@ -51,7 +52,6 @@ public class SaveImgPipeline implements Pipeline {
             }
         }
     }
-
     /**
      * 下载图片并保存
      * @param meiImgUrl 图片地址
@@ -60,9 +60,14 @@ public class SaveImgPipeline implements Pipeline {
     private void saveImg(String meiImgUrl,String meiImgNames) {
         try {
             InputStream inputStream = new URL(meiImgUrl).openConnection().getInputStream();
-            Files.copy(inputStream, Paths.get("C:\\Users\\liuqiang132\\Desktop\\tupian\\"+meiImgNames+".jpg"));
+            String replaceName = meiImgNames.replace("*", "");
+            //判断文件夹是否存在
+            if (Files.isDirectory(Paths.get("C:\\Users\\liuqiang132\\Desktop\\tupian\\"))){
+                Files.copy(inputStream, Paths.get("C:\\Users\\liuqiang132\\Desktop\\tupian\\"+replaceName+".jpg"));
+            }
+
         } catch (IOException e) {
-            //e.printStackTrace();
+            e.printStackTrace();
         }
     }
 }
